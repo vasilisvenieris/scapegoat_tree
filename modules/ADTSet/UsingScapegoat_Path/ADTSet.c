@@ -464,7 +464,7 @@ void set_insert(Set set, Pointer value) {
 	else if(set->last->next != NULL)
 		set->last = set->last->next;
 
-	// Το size αλλάζει μόνο αν μπει νέος κόμβος. Στα updates κάνουμε destroy την παλιά τιμή
+	// Το size αλλάζει μόνο αν μπει νέος κόμβος. Στα updates καταστρέφουμε την παλιά τιμή
 	if (inserted){
 		set->size++;
 		set->h_sum += (double)1/set->size;
