@@ -117,7 +117,7 @@ int sizeofTree(SetNode node){
 
 // Τοποθετεί τους κόμβους του δέντρου σε πίνακα
 int node_tree_to_sortedArr(SetNode node, SetNode arr[], int i){
-    if (node == NULL)
+    if(node == NULL)
         return i;
 
     i = node_tree_to_sortedArr(node->left, arr, i);
@@ -145,7 +145,8 @@ void node_rebuild_tree(Set set, SetNode node, SetNode parent, int asize){
 		return;
 	
 	// Για μικρά δέντρα μεγέθους έως 10k, δεσμεύεται πίνακας από το stack
-	// Αν το δέντρο είναι πολύ μεγάλο (δηλαδή εξισορροπείται από το root), ο χώρος δεσμεύεται από το heap
+	// Αν το δέντρο είναι πολύ μεγάλο (συνήθως για πάνω από 10k, τα rebalances προκαλούνται από την remove),
+	// ο χώρος δεσμεύεται από το heap
 	// Ετσι αποφεύγεται η συνεχής χρήση malloc και επιταχύνονται οι λειτουργίες
 	SetNode arr_10k[10000];
 	SetNode *arr = (asize > 10000) ? malloc(asize * sizeof(*arr)) : arr_10k;
@@ -173,7 +174,7 @@ void node_rebuild_tree(Set set, SetNode node, SetNode parent, int asize){
 // - όσες συναρτήσεις _τροποποιούν_ το δέντρο, ουσιαστικά ενεργούν στο _υποδέντρο_ με ρίζα τον κόμβο node, και επιστρέφουν τη νέα
 //   ρίζα του υποδέντρου μετά την τροποποίηση. Η νέα ρίζα χρησιμοποιείται από την προηγούμενη αναδρομική κλήση.
 //
-// Οι set_* συναρτήσεις (πιο μετά στο αρχείο), υλοποιούν τις συναρτήσεις του ADT Set, και είναι απλές, καλώντας τις αντίστοιχες node_*.
+// Οι set_* συναρτήσεις (πιο μετά στο αρχείο), υλοποιούν τις συναρτήσεις του ADTSet, και είναι απλές, καλώντας τις αντίστοιχες node_*.
 
 
 // Δημιουργεί και επιστρέφει έναν κόμβο με τιμή value (χωρίς παιδιά)
@@ -207,7 +208,7 @@ static SetNode node_find_equal(SetNode node, CompareFunc compare, Pointer value)
 		return node;
 	else if (compare_res < 0)								// value < node->value, ο κόμβος που ψάχνουμε είναι στο αριστερό υποδέντρο
 		return node_find_equal(node->left, compare, value);
-	else													// value > node->value, ο κόμβος που ψάχνουμε είνια στο δεξιό υποδέντρο
+	else													// value > node->value, ο κόμβος που ψάχνουμε είναι στο δεξιό υποδέντρο
 		return node_find_equal(node->right, compare, value);
 }
 
@@ -236,10 +237,10 @@ static SetNode node_insert(Set set, SetNode node, CompareFunc compare, Pointer v
 	if (node == NULL) {
 		*inserted = true;			// κάναμε προσθήκη
 		path[*depth] = node_create(value);
-        return path[*depth]; //ο κόμβος που εισάγεται στο BST δέντρο αποθηκεύεται στο τέλος του μονοπατιού
+        return path[*depth]; // ο κόμβος που εισάγεται στο BST δέντρο αποθηκεύεται στο τέλος του μονοπατιού
 	}
 
-	//Ο κόμβος αποθηκεύεται στον πίνακα μονοπατιού
+	// Ο κόμβος αποθηκεύεται στον πίνακα μονοπατιού
 	path[*depth] = node;
 
 	//Το βάθος του δυνητικού κόμβου αυξάνεται κατά 1
