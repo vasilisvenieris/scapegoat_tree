@@ -1,8 +1,6 @@
-![run-tests](../../workflows/run-tests/badge.svg)
-
 ## scapegoat tree
 
-Code that was written as part of the thesis
+Code in C that was written as part of the thesis
 
 ### Project structure
 
