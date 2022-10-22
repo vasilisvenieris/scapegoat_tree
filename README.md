@@ -10,11 +10,11 @@ Code in C that was written as part of the thesis
 
 - `modules`
 
-  ADTSet implementations:
-    Scapegoat tree
-    AVL
-  ADTVector implemenations:
-    Dynamic array.
+  - ADTSet implementations:
+    - Scapegoat tree
+    - AVL
+  - ADTVector implemenations:
+    - Dynamic array.
 
 - `tests`
 
